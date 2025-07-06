@@ -36,6 +36,12 @@
 #include <stdint.h>
 #include <stdarg.h>
 
+#ifdef __has_include
+#  if __has_include("logger_config.h")
+#    include "logger_config.h"
+#  endif
+#endif
+
 /**
  * @enum LogLevel
  * @brief Defines severity levels for logging.

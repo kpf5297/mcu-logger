@@ -11,6 +11,12 @@
 #include "ff.h"  // FatFS
 #endif
 
+#ifdef __has_include
+#  if __has_include("logger_config.h")
+#    include "logger_config.h"
+#  endif
+#endif
+
 // === Configuration Defaults ===
 #ifndef LOG_USE_UART
 #define LOG_USE_UART 1
@@ -18,10 +24,6 @@
 
 #ifndef LOG_USE_SD
 #define LOG_USE_SD 0
-#endif
-
-#ifndef LOG_BUFFER_SIZE
-#define LOG_BUFFER_SIZE 256
 #endif
 
 #ifndef LOG_USE_DMA
@@ -32,7 +34,13 @@
 #define LOG_USE_IT 1
 #endif
 
+#ifndef LOG_BUFFER_SIZE
+#define LOG_BUFFER_SIZE 256
+#endif
+
+#ifndef LOG_RING_BUFFER_SIZE
 #define LOG_RING_BUFFER_SIZE 1024
+#endif
 
 static LogLevel current_level = LOG_LEVEL_INFO;
 static uint8_t logging_enabled = 1;
@@ -41,7 +49,12 @@ static char ring_buffer[LOG_RING_BUFFER_SIZE];
 static volatile uint16_t head = 0;
 static volatile uint16_t tail = 0;
 
-extern UART_HandleTypeDef huart1; // Replace with your UART handle
+#ifndef LOG_UART_HANDLE
+#define LOG_UART_HANDLE huart1  // Default
+#endif
+
+extern UART_HandleTypeDef LOG_UART_HANDLE;
+
 
 #if LOG_USE_SD
 static FIL log_file;
@@ -51,7 +64,7 @@ static uint8_t sd_initialized = 0;
 /**
  * @brief Writes a string into the ring buffer for non-blocking UART output.
  * @param data Null-terminated string to enqueue.
- */
+ */ 
 static void ring_buffer_write(const char* data) {
     while (*data) {
         uint16_t next = (head + 1) % LOG_RING_BUFFER_SIZE;
@@ -68,9 +81,9 @@ static void ring_buffer_send_next(void) {
     if (tail == head) return; // Nothing to send
 #if LOG_USE_DMA
     uint16_t len = (head >= tail) ? (head - tail) : (LOG_RING_BUFFER_SIZE - tail);
-    HAL_UART_Transmit_DMA(&huart1, (uint8_t*)&ring_buffer[tail], len);
+    HAL_UART_Transmit_DMA(&LOG_UART_HANDLE, (uint8_t*)&ring_buffer[tail], len);
 #elif LOG_USE_IT
-    HAL_UART_Transmit_IT(&huart1, (uint8_t*)&ring_buffer[tail], 1);
+    HAL_UART_Transmit_IT(&LOG_UART_HANDLE, (uint8_t*)&ring_buffer[tail], 1);
 #endif
 }
 
@@ -80,7 +93,7 @@ static void ring_buffer_send_next(void) {
  * @param huart Pointer to the HAL UART handle.
  */
 void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart) {
-    if (huart->Instance == huart1.Instance) {
+    if (huart->Instance == LOG_UART_HANDLE.Instance) {
 #if LOG_USE_DMA
         tail = (tail + huart->TxXferSize) % LOG_RING_BUFFER_SIZE;
 #elif LOG_USE_IT
@@ -171,7 +184,7 @@ __attribute__((weak)) void Log_Write_UART(const char* msg) {
     ring_buffer_write(msg);
     ring_buffer_send_next();
 #else
-    HAL_UART_Transmit(&huart1, (uint8_t*)msg, strlen(msg), HAL_MAX_DELAY);
+    HAL_UART_Transmit(&LOG_UART_HANDLE, (uint8_t*)msg, strlen(msg), HAL_MAX_DELAY);
 #endif
 }
 
