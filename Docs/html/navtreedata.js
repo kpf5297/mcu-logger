@@ -25,20 +25,20 @@
 var NAVTREE =
 [
   [ "STM32 Logger", "index.html", [
-    [ "Logger System Usage Guide", "md__docs_2_u_s_a_g_e.html", [
-      [ "Features", "md__docs_2_u_s_a_g_e.html#autotoc_md2", null ],
-      [ "Files", "md__docs_2_u_s_a_g_e.html#autotoc_md4", null ],
-      [ "Configuration", "md__docs_2_u_s_a_g_e.html#autotoc_md6", null ],
-      [ "Initialization and Usage", "md__docs_2_u_s_a_g_e.html#autotoc_md8", [
-        [ "Initialization:", "md__docs_2_u_s_a_g_e.html#autotoc_md9", null ],
-        [ "Logging:", "md__docs_2_u_s_a_g_e.html#autotoc_md10", null ],
-        [ "Disabling/Flushing:", "md__docs_2_u_s_a_g_e.html#autotoc_md11", null ]
+    [ "Logger System Usage Guide", "md_docs_2_u_s_a_g_e.html", [
+      [ "Features", "md_docs_2_u_s_a_g_e.html#autotoc_md2", null ],
+      [ "Files", "md_docs_2_u_s_a_g_e.html#autotoc_md4", null ],
+      [ "Configuration", "md_docs_2_u_s_a_g_e.html#autotoc_md6", null ],
+      [ "Initialization and Usage", "md_docs_2_u_s_a_g_e.html#autotoc_md8", [
+        [ "Initialization:", "md_docs_2_u_s_a_g_e.html#autotoc_md9", null ],
+        [ "Logging:", "md_docs_2_u_s_a_g_e.html#autotoc_md10", null ],
+        [ "Disabling/Flushing:", "md_docs_2_u_s_a_g_e.html#autotoc_md11", null ]
       ] ],
-      [ "UART Integration", "md__docs_2_u_s_a_g_e.html#autotoc_md13", null ],
-      [ "SD Card Integration", "md__docs_2_u_s_a_g_e.html#autotoc_md15", null ],
-      [ "Custom Output Hooks", "md__docs_2_u_s_a_g_e.html#autotoc_md17", null ],
-      [ "Example Session", "md__docs_2_u_s_a_g_e.html#autotoc_md19", null ],
-      [ "Tips", "md__docs_2_u_s_a_g_e.html#autotoc_md21", null ]
+      [ "UART Integration", "md_docs_2_u_s_a_g_e.html#autotoc_md13", null ],
+      [ "SD Card Integration", "md_docs_2_u_s_a_g_e.html#autotoc_md15", null ],
+      [ "Custom Output Hooks", "md_docs_2_u_s_a_g_e.html#autotoc_md17", null ],
+      [ "Example Session", "md_docs_2_u_s_a_g_e.html#autotoc_md19", null ],
+      [ "Tips", "md_docs_2_u_s_a_g_e.html#autotoc_md21", null ]
     ] ],
     [ "MCU Logger", "md__r_e_a_d_m_e.html", [
       [ "Features", "md__r_e_a_d_m_e.html#autotoc_md27", null ],

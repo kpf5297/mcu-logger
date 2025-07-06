@@ -2,6 +2,7 @@ var logger_8c =
 [
     [ "LOG_BUFFER_SIZE", "logger_8c.html#a381c342b2b34df0b1a5b39c0d94da4e1", null ],
     [ "LOG_RING_BUFFER_SIZE", "logger_8c.html#ab02d95ba9f3ba480cff6c4112222c3bc", null ],
+    [ "LOG_UART_HANDLE", "logger_8c.html#abd84ac529722080b53ca71d53f03cfcd", null ],
     [ "LOG_USE_DMA", "logger_8c.html#ae25fd7db8e48e9b887fe5cb344c3aadb", null ],
     [ "LOG_USE_IT", "logger_8c.html#a3b9e280b5f6ec136a24121da98750140", null ],
     [ "LOG_USE_SD", "logger_8c.html#aba9c6a074048e6b9d668117c462f6831", null ],
@@ -13,5 +14,5 @@ var logger_8c =
     [ "Log_Flush", "logger_8c.html#ae9bbb58a3357700baf0129085fd3b873", null ],
     [ "Log_Init", "logger_8c.html#a5f3b99e0966ad05cc569bea9b503b148", null ],
     [ "Log_SetLevel", "logger_8c.html#ab5ac2c49a23a7bb4188e959861357ade", null ],
-    [ "huart1", "logger_8c.html#a2cf715bef37f7e8ef385a30974a5f0d5", null ]
+    [ "LOG_UART_HANDLE", "logger_8c.html#a7b7633300299af4324541c52f20df7b4", null ]
 ];

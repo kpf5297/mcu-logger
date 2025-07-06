@@ -102,10 +102,11 @@ $(function(){initNavTree('logger_8c.html','',''); });
 Macros</h2></td></tr>
 <tr class="memitem:adc8f2c3ac62adc55827b15e6f1da1bcb" id="r_adc8f2c3ac62adc55827b15e6f1da1bcb"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#adc8f2c3ac62adc55827b15e6f1da1bcb">LOG_USE_UART</a>&#160;&#160;&#160;1</td></tr>
 <tr class="memitem:aba9c6a074048e6b9d668117c462f6831" id="r_aba9c6a074048e6b9d668117c462f6831"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aba9c6a074048e6b9d668117c462f6831">LOG_USE_SD</a>&#160;&#160;&#160;0</td></tr>
-<tr class="memitem:a381c342b2b34df0b1a5b39c0d94da4e1" id="r_a381c342b2b34df0b1a5b39c0d94da4e1"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a381c342b2b34df0b1a5b39c0d94da4e1">LOG_BUFFER_SIZE</a>&#160;&#160;&#160;256</td></tr>
 <tr class="memitem:ae25fd7db8e48e9b887fe5cb344c3aadb" id="r_ae25fd7db8e48e9b887fe5cb344c3aadb"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae25fd7db8e48e9b887fe5cb344c3aadb">LOG_USE_DMA</a>&#160;&#160;&#160;0</td></tr>
 <tr class="memitem:a3b9e280b5f6ec136a24121da98750140" id="r_a3b9e280b5f6ec136a24121da98750140"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3b9e280b5f6ec136a24121da98750140">LOG_USE_IT</a>&#160;&#160;&#160;1</td></tr>
+<tr class="memitem:a381c342b2b34df0b1a5b39c0d94da4e1" id="r_a381c342b2b34df0b1a5b39c0d94da4e1"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a381c342b2b34df0b1a5b39c0d94da4e1">LOG_BUFFER_SIZE</a>&#160;&#160;&#160;256</td></tr>
 <tr class="memitem:ab02d95ba9f3ba480cff6c4112222c3bc" id="r_ab02d95ba9f3ba480cff6c4112222c3bc"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab02d95ba9f3ba480cff6c4112222c3bc">LOG_RING_BUFFER_SIZE</a>&#160;&#160;&#160;1024</td></tr>
+<tr class="memitem:abd84ac529722080b53ca71d53f03cfcd" id="r_abd84ac529722080b53ca71d53f03cfcd"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abd84ac529722080b53ca71d53f03cfcd">LOG_UART_HANDLE</a>&#160;&#160;&#160;huart1</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
@@ -126,7 +127,7 @@ Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-var-members" class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
-<tr class="memitem:a2cf715bef37f7e8ef385a30974a5f0d5" id="r_a2cf715bef37f7e8ef385a30974a5f0d5"><td class="memItemLeft" align="right" valign="top">UART_HandleTypeDef&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2cf715bef37f7e8ef385a30974a5f0d5">huart1</a></td></tr>
+<tr class="memitem:a7b7633300299af4324541c52f20df7b4" id="r_a7b7633300299af4324541c52f20df7b4"><td class="memItemLeft" align="right" valign="top">UART_HandleTypeDef&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7b7633300299af4324541c52f20df7b4">LOG_UART_HANDLE</a></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Implementation of the modular logging system for STM32-based MCU projects. </p>
@@ -153,6 +154,20 @@ Variables</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">#define LOG_RING_BUFFER_SIZE&#160;&#160;&#160;1024</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="abd84ac529722080b53ca71d53f03cfcd" name="abd84ac529722080b53ca71d53f03cfcd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abd84ac529722080b53ca71d53f03cfcd">&#9670;&#160;</a></span>LOG_UART_HANDLE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define LOG_UART_HANDLE&#160;&#160;&#160;huart1</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -401,8 +416,8 @@ Variables</h2></td></tr>
 </div>
 </div>
 <a name="doc-var-members" id="doc-var-members"></a><h2 id="header-doc-var-members" class="groupheader">Variable Documentation</h2>
-<a id="a2cf715bef37f7e8ef385a30974a5f0d5" name="a2cf715bef37f7e8ef385a30974a5f0d5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2cf715bef37f7e8ef385a30974a5f0d5">&#9670;&#160;</a></span>huart1</h2>
+<a id="a7b7633300299af4324541c52f20df7b4" name="a7b7633300299af4324541c52f20df7b4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7b7633300299af4324541c52f20df7b4">&#9670;&#160;</a></span>LOG_UART_HANDLE</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -411,7 +426,7 @@ Variables</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">UART_HandleTypeDef huart1</td>
+          <td class="memname">UART_HandleTypeDef LOG_UART_HANDLE</td>
         </tr>
       </table>
   </td>

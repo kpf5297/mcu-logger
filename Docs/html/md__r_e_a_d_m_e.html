@@ -120,7 +120,8 @@ Integration</h1>
 <div class="line">Create a `logger_config.h` file in your application to override defaults.</div>
 <div class="line"> </div>
 <div class="line">Example:</div>
-</div><!-- fragment --><p> c #define LOG_UART_HANDLE huart2 #define LOG_SD_ENABLED 1 #define LOG_BUFFER_SIZE 1024 </p><div class="fragment"><div class="line">## Example</div>
+</div><!-- fragment --><p> c // logger_config.h #pragma once</p>
+<p>// user configuration overrides #define LOG_UART_HANDLE huart2 #define LOG_USE_SD 0 #define LOG_USE_UART 1 #define LOG_USE_IT 1 #define LOG_USE_DMA 0 #define LOG_BUFFER_SIZE 1024 #define LOG_RING_BUFFER_SIZE 2048 </p><div class="fragment"><div class="line">## Example</div>
 <div class="line"> </div>
 <div class="line">See [`Examples/STM32F4_UART_SD/main.c`](Examples/STM32F4_UART_SD/main.c) for a complete STM32F4 integration example.</div>
 <div class="line"> </div>

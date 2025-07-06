@@ -3,7 +3,7 @@ var indexSectionsWithContent =
   0: "_acdefghilmorstu",
   1: "lru",
   2: "_hl",
-  3: "h",
+  3: "l",
   4: "l",
   5: "l",
   6: "l",
