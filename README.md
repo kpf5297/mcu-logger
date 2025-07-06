@@ -14,6 +14,10 @@ A flexible and modular logging system for STM32-based microcontroller projects. 
 - Integration-friendly with other UART users (e.g., CLI or telemetry)
 - Lightweight footprint for resource-constrained devices
 
+## Doxygen Documentation
+
+[![Doxygen](https://img.shields.io/badge/docs-Doxygen-blue.svg)](https://kpf5297.github.io/mcu-logger/)
+
 ## Integration
 
 Include the following in your STM32 project:
