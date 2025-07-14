@@ -129,8 +129,8 @@ void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart) {
 #endif
         LOG_ENTER_CRITICAL();
         tx_busy = false;
-        LOG_EXIT_CRITICAL();
         ring_buffer_send_next();
+        LOG_EXIT_CRITICAL();
     }
 }
 
