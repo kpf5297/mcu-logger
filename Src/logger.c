@@ -6,6 +6,7 @@
 #include "logger.h"
 #include <stdio.h>
 #include <string.h>
+#include <stdbool.h>
 
 #if LOG_USE_SD
 #include "ff.h"  // FatFS
@@ -48,6 +49,14 @@ static uint8_t logging_enabled = 1;
 static char ring_buffer[LOG_RING_BUFFER_SIZE];
 static volatile uint16_t head = 0;
 static volatile uint16_t tail = 0;
+static volatile bool tx_busy = false;
+
+#ifndef LOG_ENTER_CRITICAL
+#define LOG_ENTER_CRITICAL() __disable_irq()
+#endif
+#ifndef LOG_EXIT_CRITICAL
+#define LOG_EXIT_CRITICAL() __enable_irq()
+#endif
 
 #ifndef LOG_UART_HANDLE
 #define LOG_UART_HANDLE huart1  // Default
@@ -67,10 +76,15 @@ static uint8_t sd_initialized = 0;
  */ 
 static void ring_buffer_write(const char* data) {
     while (*data) {
+        LOG_ENTER_CRITICAL();
         uint16_t next = (head + 1) % LOG_RING_BUFFER_SIZE;
-        if (next == tail) break; // Buffer full
+        if (next == tail) {
+            LOG_EXIT_CRITICAL();
+            break; // Buffer full
+        }
         ring_buffer[head] = *data++;
         head = next;
+        LOG_EXIT_CRITICAL();
     }
 }
 
@@ -78,9 +92,19 @@ static void ring_buffer_write(const char* data) {
  * @brief Starts or continues sending data from the ring buffer via UART.
  */
 static void ring_buffer_send_next(void) {
-    if (tail == head) return; // Nothing to send
+    uint16_t len = 0;
+    LOG_ENTER_CRITICAL();
+    if (tx_busy || tail == head) {
+        LOG_EXIT_CRITICAL();
+        return; // Nothing to send or already transmitting
+    }
 #if LOG_USE_DMA
-    uint16_t len = (head >= tail) ? (head - tail) : (LOG_RING_BUFFER_SIZE - tail);
+    len = (head >= tail) ? (head - tail) : (LOG_RING_BUFFER_SIZE - tail);
+#endif
+    tx_busy = true;
+    LOG_EXIT_CRITICAL();
+
+#if LOG_USE_DMA
     HAL_UART_Transmit_DMA(&LOG_UART_HANDLE, (uint8_t*)&ring_buffer[tail], len);
 #elif LOG_USE_IT
     HAL_UART_Transmit_IT(&LOG_UART_HANDLE, (uint8_t*)&ring_buffer[tail], 1);
@@ -95,10 +119,17 @@ static void ring_buffer_send_next(void) {
 void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart) {
     if (huart->Instance == LOG_UART_HANDLE.Instance) {
 #if LOG_USE_DMA
+        LOG_ENTER_CRITICAL();
         tail = (tail + huart->TxXferSize) % LOG_RING_BUFFER_SIZE;
+        LOG_EXIT_CRITICAL();
 #elif LOG_USE_IT
+        LOG_ENTER_CRITICAL();
         tail = (tail + 1) % LOG_RING_BUFFER_SIZE;
+        LOG_EXIT_CRITICAL();
 #endif
+        LOG_ENTER_CRITICAL();
+        tx_busy = false;
+        LOG_EXIT_CRITICAL();
         ring_buffer_send_next();
     }
 }
