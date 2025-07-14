@@ -74,12 +74,11 @@ You must define a UART handle externally:
 extern UART_HandleTypeDef huart1;
 ```
 
-And call the UART complete callback:
+Forward the UART TX complete interrupt to the logger:
 
 ```c
 void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart) {
-    // Call into logger
-    Logger_HAL_UART_TxCpltCallback(huart); // or place `ring_buffer_send_next()` inline
+    Logger_UART_TxCpltCallback(huart); // provided by logger.c
 }
 ```
 

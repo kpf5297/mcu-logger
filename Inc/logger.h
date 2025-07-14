@@ -102,3 +102,11 @@ __attribute__((weak)) void Log_Write_UART(const char* msg);
  * @param msg Null-terminated string to write to file.
  */
 __attribute__((weak)) void Log_Write_SD(const char* msg);
+
+/**
+ * @brief Handler for UART transmission complete events used by the logger.
+ *
+ * Call this from your own `HAL_UART_TxCpltCallback` if the application
+ * requires a custom implementation in addition to the logger's handling.
+ */
+void Logger_UART_TxCpltCallback(UART_HandleTypeDef *huart);
