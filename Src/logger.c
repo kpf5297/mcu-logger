@@ -112,11 +112,15 @@ static void ring_buffer_send_next(void) {
 }
 
 /**
- * @brief UART transmission complete callback handler.
- *        Should be called from HAL_UART_TxCpltCallback().
+ * @brief Handles completion of a UART transmission for the logger.
+ *
+ * This function contains the actual processing logic and can be called
+ * from a user-defined `HAL_UART_TxCpltCallback` if the application needs
+ * to handle the callback as well.
+ *
  * @param huart Pointer to the HAL UART handle.
  */
-void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart) {
+void Logger_UART_TxCpltCallback(UART_HandleTypeDef *huart) {
     if (huart->Instance == LOG_UART_HANDLE.Instance) {
 #if LOG_USE_DMA
         LOG_ENTER_CRITICAL();
@@ -132,6 +136,17 @@ void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart) {
         ring_buffer_send_next();
         LOG_EXIT_CRITICAL();
     }
+}
+
+/**
+ * @brief HAL UART transmission complete callback.
+ *
+ * By default this simply forwards to `Logger_UART_TxCpltCallback()`. If the
+ * application defines its own `HAL_UART_TxCpltCallback`, it should call this
+ * function to keep the logger operating.
+ */
+void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart) {
+    Logger_UART_TxCpltCallback(huart);
 }
 
 /**
